@@ -7,7 +7,7 @@ function App() {
       <header className="app-header">
         <div className="header-left">
           <span className="logo-icon">⚡</span>
-          <h1>User Permissions Control Panel</h1>
+          <h1>Vendor Task Assignment Panel</h1>
         </div>
         <span className="header-badge">Admin View</span>
       </header>
