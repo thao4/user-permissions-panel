@@ -1,16 +1,44 @@
-# React + Vite
+# Vendor Task Assignment Panel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React demo application for managing vendors and assigning tasks to them based on matching rules.
 
-Currently, two official plugins are available:
+## What it does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The app has two sections:
 
-## React Compiler
+### Vendors
+A table of vendors, each with a **Region Code** and **Task Code** rule. These two fields determine which tasks a vendor is eligible to receive. You can:
+- Add and remove vendors
+- Edit a vendor's Region Code and Task Code inline (click any cell to edit)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Tasks
+A table of tasks, each with the following attributes:
+- **Task** — the task name (editable inline)
+- **Region Code** — the region the task belongs to (editable inline)
+- **Task Code** — the task type code (editable inline)
+- **Is Valid** — whether the task is eligible for assignment (click to toggle)
+- **Assigned To** — which vendor the task is assigned to
 
-## Expanding the ESLint configuration
+You can add and remove tasks. Invalid tasks are visually dimmed and cannot be assigned.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Auto-assign
+
+The **Auto-assign** button matches each valid task to a vendor by comparing:
+
+```
+task.region_code === vendor.region_code  AND  task.task_code === vendor.task_code
+```
+
+- If one vendor matches, the task is assigned to them.
+- If multiple vendors match, one is picked at random.
+- If no vendor matches, the task remains unassigned.
+- Invalid tasks are always left unassigned.
+
+The **Unassign All** button clears all assignments at once. Individual assignments can also be removed using the × on each assigned badge.
+
+## Running locally
+
+```bash
+npm install
+npm run dev
+```
